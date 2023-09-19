@@ -11,17 +11,28 @@ const listaDeAtendimento=new Array();
 
 
 function incluir(){
-    listaDeAtendimento.push(inputNome.value);
-    listar();
+    let pessoa={
+                    nome:inputNome.value,
+                    prioridade: selectPrioridade.value==='P' ? true:false
+                }
+
+    if(pessoa.prioridade){
+        listaDeAtendimento.unshift(pessoa);
+        listar();
+    } else{
+        listaDeAtendimento.push(pessoa);
+        listar();
+    }
+
 }
 
 function listar(){
     ulLista.innerHTML="";
-    for(let nome of listaDeAtendimento){
+    for(let pessoa of listaDeAtendimento){
     
         let li = document.createElement('li')
         li.classList.add('list-group-item')
-        li.textContent=nome
+        li.textContent=pessoa.nome
         ulLista.appendChild(li)
 
     }
@@ -30,3 +41,5 @@ function listar(){
 //eventos vvv
 
 btnIncluir.onclick=incluir;
+
+
